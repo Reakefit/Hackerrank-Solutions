@@ -19,7 +19,7 @@ def arrayMerging(m):
                     nextQ.append((x, subseqLen + 1, -1, 1))
             nextQ.append((x, 1, subseqLen, (subseqLen * ways) % mod))
 
-        condensed_nextQ = deque()
+        condensedNextQ = deque()
         condensed = {}
         for item in nextQ:
             key = item[:3]
@@ -28,9 +28,9 @@ def arrayMerging(m):
             else:
                 condensed[key] = item[3]
 
-        for key, combined_ways in condensed.items():
-            condensed_nextQ.append((*key, combined_ways))
-        q = condensed_nextQ
+        for key, combinedWays in condensed.items():
+            condensedNextQ.append((*key, combinedWays))
+        q = condensedNextQ
         print(q)
     return sum(ways for _, _, _, ways in q) % mod
 
