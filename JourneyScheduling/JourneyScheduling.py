@@ -1,5 +1,4 @@
 from collections import defaultdict
-import os
 
 def dfs(node, graph, visited, dist, distances):
     visited[node] = True
@@ -48,8 +47,9 @@ def journeyScheduling(n, graph, queries):
 if __name__ == "__main__":
     n, m = 8, 2
 
+    edges = [(1, 2), (2, 3), (2, 4), (1, 5), (1, 6), (1, 7), (7, 8)]
     graph = defaultdict(list)
-    for u, v in [(1, 2), (2, 3), (2, 4), (1, 5), (1, 6), (1, 7), (7, 8)]:
+    for u, v in edges:
         graph[u].append(v)
         graph[v].append(u)
     queries = [(4, 6), (6, 3), (7, 6), (4, 6), (7, 1), (2, 6)]
