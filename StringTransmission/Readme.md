@@ -1,9 +1,13 @@
-Honestly this doesn't need much of a write up. Done similar stuff to this and muscle memory kicks up to tell that is an dp problem. All we need to do is keep track of index and number of changes done already.
-Index can go from 0-n and number of changes can go from 0-k.
-So dp[n][k] just track these and handle it. We go each step and see what changes can be done and we evaluate if it is valid and move onto the next stage step by step while keeping memory of previous steps.
+Okay so brute force does not work where we just find all the possible patterns upto k changes and count them.
+We need dp over here, lru cache does not work. Can't build up from previous step easily still takes too much time.
+We need to dive deeper into combinations and periodicity.
 
-And again this can be optimised by keeping a prefix sum so we don't have to add each time.
-This can be understood as:
-Maintaining a DP array where dp[i][j][l] represents the number of ways to make the first i bits of the string equal, using j operations, and l is a flag indicating whether I have made the current segment of bits equal or not. The segments are defined by the positions that have been flipped.
+First if a string is periodic, it's periodicity has to be a factor of it obviously. We can leverage this.
+We also need a way to avoid over-counting, for example
+Consider the case where we flip bits in segments of size 2 and 3. If we flip bits in segments of size 2, we might get a new binary string. Then, if we flip bits in segments of size 3 in the original string, we might get the same binary string that we got by flipping bits in segments of size 2. 
+Here we are counting the string twice.
 
-But instead we can just have a prefix sum and compute the sum and reduce complexity.
+So to avoid this let's go to number theory. We can implement mobius function based on if it has even or odd number of prime factors or is a square of prime number.
+So we can later subtract overcounts
+
+*LEARNING POINT* TIL that in C++ -1 % MOD is not MOD - 1 unlike in python, spent an embarassing amount of time trying to figure out why my code isn't passing.
